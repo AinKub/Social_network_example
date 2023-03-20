@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  
+  main
+
+    section.posts.single_post_section
+      
+        ul.posts_list 
+            
+            li.single_post(id='post_' + post.id)
+        
+                div.post_area
+
+                    div.text_area
+
+                        div.user_info 
+
+                            div.img-cover.small_cover
+                                if user.Photo
+                                    img.user_pic.small_pic(src='/images/' + user.Photo.file_name, alt='user pic') 
+                                else 
+                                    img.user_pic.no_pic_and_small(src='/images/no_photo.png', alt='user pic')
+
+                            a(href="/user/" + user.id)
+                                p.author_name.black_link #{user.first_name} #{user.last_name}
+
+                        h3 #{post.title} 
+                        if post.body 
+                            p.post_text #{post.body}
+
+                    div.like_area
+                        if post.PostLike  
+                            img.like_pic.liked(src='/images/liked.svg', alt='liked', id='like_post_' + post.id)
+                        else 
+                            img.like_pic(src='/images/like.svg', alt='like', id='like_post_' + post.id)
+
+

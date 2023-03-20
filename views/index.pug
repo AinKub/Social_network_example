@@ -1,0 +1,54 @@
+extends layout
+
+block content
+
+  h1 Social Network
+  
+  main 
+
+    section.authors 
+
+      h2 Our authors
+
+      ul.authors_list
+
+        each val in users
+          li(id='user_' + val.id)
+
+            div.user_info 
+
+              div.img-cover.small_cover
+                if val.Photo
+                  img.user_pic.small_pic(src='/images/' + val.Photo.file_name, alt='user pic') 
+                else 
+                  img.user_pic.no_pic_and_small(src='/images/no_photo.png', alt='user pic')
+
+              p.author_name 
+                a(href="/user/" + val.id) #{val.first_name} #{val.last_name}
+
+    section.posts
+
+      h2 Last posts
+      
+      ul.posts_list 
+
+        each val in posts
+          li.post_elem(id='post_' + val.id)
+          
+            div.post_area
+
+              div.text_area
+
+                a(href="/post/" + val.id + "/" + val.UserId) 
+                  h3.black_link #{val.title} 
+                  
+                if val.body 
+                  p.post_text #{val.body}
+
+              div.like_area
+                if JSON.parse(JSON.stringify(val)).PostLike  
+                  img.like_pic.liked(src='/images/liked.svg', alt='liked', id='like_post_' + val.id)
+                else 
+                  img.like_pic(src='/images/like.svg', alt='like', id='like_post_' + val.id)
+
+
